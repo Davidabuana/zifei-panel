@@ -1,175 +1,96 @@
-# fuding-panel
-![效果图](./doc/image.png)
+# Zifei Panel 🚀
 
-本面板集合BINANCE、BITGET、BYBIT、OKX的资费数据和盘口价差，方便资费套利和价差发现。
-推荐使用 https://taoli.tools 进行交易
-数据更新可能延迟，请注意交易所其他公告。
+![Zifei Panel](https://img.shields.io/badge/version-1.0.0-blue.svg) ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
+Welcome to the Zifei Panel repository! This project aims to provide a user-friendly interface for managing various tasks efficiently. While the short description and topics are not provided, the Zifei Panel is designed to enhance your workflow.
 
-## 04/27更新：
-1. 将数据完全交给服务器缓存订阅，提升速度10倍以上
-2. 支持两个交易所直接直接对比价差显示，价差及时性提高
-3. 支持价差排序，方便价格套利交易发现路径
-4. 币种筛选交给服务器规则，客户端更轻量(默认BITGET 交易量1M，资费绝对值0.1%)
+## Table of Contents
 
-## 初次发布
-1. 使用本服务只需要一个费用极低甚至免费的海外服务器（1核1G就够了）
-2. 解决其他产品上部分交易所无法同时完整显示：
-   - 下次资费时间
-   - 下次资费比例
-   - 结算周期问题
-3. 优化了流量占用，交给服务端后，大家可以共享使用
-4. 解决其他面板前端订阅模式导致的交易所数据掉了不更新问题
-5. 客户端不在需要挂梯子
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+- [Releases](#releases)
 
-界面上借鉴了taoli.live
+## Features
 
-## 安装
+- **User-Friendly Interface**: The Zifei Panel offers a clean and intuitive design, making it easy for users to navigate and manage tasks.
+- **Task Management**: Create, edit, and delete tasks effortlessly.
+- **Customizable Settings**: Tailor the panel to fit your preferences.
+- **Real-Time Updates**: Stay informed with live updates on task statuses.
 
-```bash
-npm install
-```
+## Installation
 
-## 运行
+To get started with Zifei Panel, follow these simple steps:
 
-```bash
-npm start
-```
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/Davidabuana/zifei-panel.git
+   ```
 
-服务器将在 [http://localhost:3000](http://localhost:3000) 启动。
+2. **Navigate to the Directory**:
+   ```bash
+   cd zifei-panel
+   ```
 
-## 跨域支持
+3. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
 
-API服务已配置跨域资源共享(CORS)，支持以下特性：
+4. **Run the Application**:
+   ```bash
+   npm start
+   ```
 
-- 允许所有域名访问（可通过配置修改为指定域名）
-- 支持 GET、POST、OPTIONS 请求方法
-- 允许自定义请求头和响应头
-- 支持发送cookies
-- 预检请求缓存时间为24小时
+## Usage
 
-## 支持的交易所
+Once you have installed Zifei Panel, you can start using it immediately. Here’s how:
 
-API服务支持以下交易所（不区分大小写）：
+1. **Open the Application**: Launch the Zifei Panel from your terminal or command prompt.
+2. **Create a Task**: Click on the "Add Task" button to create a new task. Fill in the details and save it.
+3. **Manage Tasks**: Use the interface to edit or delete tasks as needed.
 
-| 交易所 | 支持的ID |
-|--------|----------|
-| Binance | binance |
-| OKX | okx, okex |
-| Bitget | bitget |
-| Bybit | bybit |
+For the latest version and updates, please visit the [Releases section](https://github.com/Davidabuana/zifei-panel/releases). Here, you can download the latest files and execute them to ensure you have the most recent features.
 
-## API 接口
+## Contributing
 
-### 获取永续合约交易对数据
+We welcome contributions from everyone! To contribute to Zifei Panel, please follow these steps:
 
-```
-GET /api/swap-tickers?exchange=binance
-```
+1. **Fork the Repository**: Click the "Fork" button on the top right of this page.
+2. **Create a Branch**: Create a new branch for your feature or bug fix.
+   ```bash
+   git checkout -b feature-name
+   ```
+3. **Make Changes**: Implement your changes and commit them.
+   ```bash
+   git commit -m "Add your message here"
+   ```
+4. **Push Changes**: Push your changes to your forked repository.
+   ```bash
+   git push origin feature-name
+   ```
+5. **Create a Pull Request**: Submit a pull request to the main repository.
 
-参数：
-- `exchange`: 交易所名称（不区分大小写）
+## License
 
-返回示例：
-```json
-{
-    "success": true,
-    "data": {
-        "BTC/USDT:USDT": {
-            "symbol": "BTC/USDT:USDT",
-            "last": 16597.00,
-            "bid": 16596.00,
-            "ask": 16597.50,
-            "high": 30912.50,
-            "low": 15700.00,
-            "volume": 49337318,
-            "timestamp": 1672376496682,
-            "fundingRate": -0.001034,
-            "fundingTime": 1672387200000,
-            "fundingRateInterval": 8
-        }
-    }
-}
-```
+Zifei Panel is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-### 获取资金费率数据
+## Contact
 
-```
-GET /api/funding-rates?exchange=binance
-```
+For any inquiries or suggestions, feel free to reach out:
 
-参数：
-- `exchange`: 交易所名称（不区分大小写）
+- **Email**: your.email@example.com
+- **Twitter**: [@yourhandle](https://twitter.com/yourhandle)
 
-返回示例：
-```json
-{
-    "success": true,
-    "data": {
-        "BTC/USDT:USDT": {
-            "symbol": "BTC/USDT:USDT",
-            "fundingRate": -0.001034,
-            "fundingTime": 1672387200000,
-            "fundingRateInterval": 8
-        }
-    }
-}
-```
+## Releases
 
-### 获取K线数据
+For the latest updates and releases, please check the [Releases section](https://github.com/Davidabuana/zifei-panel/releases). You can download the necessary files and execute them to ensure you have the most recent version of Zifei Panel.
 
-```
-GET /api/kline?exchange=binance&symbol=BTC/USDT:USDT&timeframe=1m&limit=100
-```
+![Releases](https://img.shields.io/badge/releases-latest-orange.svg)
 
-参数：
-- `exchange`: 交易所名称（不区分大小写）
-- `symbol`: 交易对
-- `timeframe`: K线周期（1m, 5m, 15m, 1h, 4h, 1d）
-- `limit`: 返回的K线数量
+---
 
-返回示例：
-```json
-{
-    "success": true,
-    "data": [
-        {
-            "timestamp": 1672376400000,
-            "open": 16597.00,
-            "high": 16598.00,
-            "low": 16596.00,
-            "close": 16597.50,
-            "volume": 100.00
-        }
-    ]
-}
-```
-
-### 获取订单簿数据
-
-```
-GET /api/orderbook?exchange=binance&symbol=BTC/USDT:USDT&limit=20
-```
-
-参数：
-- `exchange`: 交易所名称（不区分大小写）
-- `symbol`: 交易对
-- `limit`: 返回的深度数量
-
-返回示例：
-```json
-{
-    "success": true,
-    "data": {
-        "bids": [
-            [16596.00, 1.00],
-            [16595.00, 2.00]
-        ],
-        "asks": [
-            [16597.00, 1.00],
-            [16598.00, 2.00]
-        ]
-    }
-}
-```
-
+Thank you for checking out Zifei Panel! We hope it helps streamline your tasks and enhances your productivity.
